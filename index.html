@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Doraemon's Special Message</title>
     <style>
         body {
@@ -12,39 +12,31 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
-            overflow: hidden;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .container {
             text-align: center;
+            width: 100%;
+            max-width: 500px;
             position: relative;
         }
 
-        .doraemon {
-            width: 300px;
-            height: 300px;
-            background-image: url('doremon.jpg');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            margin: 0 auto;
-            position: relative;
-            animation: bounce 2s infinite alternate;
-        }
         .speech-bubble {
-            position: absolute;
-            top: -100px;
-            left: 50%;
-            transform: translateX(-50%);
             background-color: white;
-            padding: 20px;
+            padding: 12px 16px;
             border-radius: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             opacity: 0;
-            width: 250px;
+            width: 90%;
+            max-width: 280px;
             animation: fadeIn 2s forwards 1s;
+            box-sizing: border-box;
+            margin: 0 auto 20px auto;
+            position: relative;
         }
 
         .speech-bubble:after {
@@ -59,9 +51,24 @@
         }
 
         .message {
-            font-size: 18px;
+            font-size: clamp(14px, 4vw, 18px);
             color: #333;
             font-weight: bold;
+            margin: 0;
+            line-height: 1.4;
+            text-align: center;
+            word-wrap: break-word;
+        }
+
+        .doraemon {
+            width: 300px;
+            height: 300px;
+            background-image: url('doremon.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 0 auto;
+            animation: bounce 2s infinite alternate;
         }
 
         .caption {
@@ -71,6 +78,8 @@
             opacity: 0;
             animation: fadeIn 2s forwards 3s;
             position: relative;
+            padding: 0 20px;
+            font-size: clamp(14px, 4vw, 18px);
         }
 
         .caption:before, .caption:after {
@@ -81,12 +90,12 @@
         }
 
         .caption:before {
-            left: -15px;
+            left: 0;
             top: -5px;
         }
 
         .caption:after {
-            right: -15px;
+            right: 0;
             bottom: -10px;
         }
 
@@ -111,11 +120,13 @@
         }
 
         .hearts {
-            position: absolute;
+            position: fixed;
             width: 100%;
             height: 100%;
             pointer-events: none;
             z-index: -1;
+            top: 0;
+            left: 0;
         }
 
         .heart {
@@ -127,7 +138,8 @@
             opacity: 0;
         }
 
-        .heart:before, .heart:after {
+        .heart:before,
+        .heart:after {
             content: '';
             width: 20px;
             height: 20px;
@@ -145,16 +157,33 @@
             top: 0;
             left: -10px;
         }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(45deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(45deg);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="hearts" id="hearts"></div>
     <div class="container">
         <div class="speech-bubble">
-            <p class="message">Hey Sagorika,You know Kaustav loves you more than anything existing!</p>
+            <p class="message">Hey Sagorika, You know Kaustav loves you more than anything existing!</p>
         </div>
         <div class="doraemon"></div>
-        <p class="caption">Hey Sagorika,You know Kaustav loves you more than anything existing</p>
+        <p class="caption">Hey Sagorika, You know Kaustav loves you more than anything existing</p>
     </div>
 
     <script>
@@ -162,62 +191,33 @@
         function createHearts() {
             const heartsContainer = document.getElementById('hearts');
             const colors = ['#ff6b6b', '#ff8e8e', '#ffb3b3', '#ffd8d8'];
-            
-            for (let i = 0; i < 15; i++) {
+            const count = window.innerWidth < 480 ? 10 : 15;
+
+            for (let i = 0; i < count; i++) {
                 const heart = document.createElement('div');
                 heart.classList.add('heart');
-                
-                // Random properties
+
                 const size = Math.random() * 15 + 5;
                 const posX = Math.random() * window.innerWidth;
                 const posY = Math.random() * window.innerHeight;
                 const delay = Math.random() * 5;
                 const duration = Math.random() * 5 + 5;
                 const color = colors[Math.floor(Math.random() * colors.length)];
-                
+
                 heart.style.width = `${size}px`;
                 heart.style.height = `${size}px`;
                 heart.style.left = `${posX}px`;
                 heart.style.top = `${posY}px`;
                 heart.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
                 heart.style.backgroundColor = color;
-                
-                // Create pseudo-elements with the same color
-                heart.style.setProperty('--heart-color', color);
-                
+
                 heartsContainer.appendChild(heart);
-                
-                // Add animation for floating
-                const keyframes = `
-                    @keyframes float {
-                        0% {
-                            transform: translateY(0) rotate(45deg);
-                            opacity: 0;
-                        }
-                        10% {
-                            opacity: 1;
-                        }
-                        90% {
-                            opacity: 1;
-                        }
-                        100% {
-                            transform: translateY(-100vh) rotate(45deg);
-                            opacity: 0;
-                        }
-                    }
-                `;
-                
-                const style = document.createElement('style');
-                style.innerHTML = keyframes;
-                document.head.appendChild(style);
             }
         }
-        
-        // Start animation when page loads
-        window.onload = function() {
+
+        window.onload = function () {
             createHearts();
-            
-            // Make Doraemon blink occasionally
+
             const doraemon = document.querySelector('.doraemon');
             setInterval(() => {
                 doraemon.style.animation = 'none';
@@ -226,6 +226,13 @@
                 }, 200);
             }, 5000);
         };
+
+        // Optional: recreate hearts on window resize
+        window.addEventListener('resize', function () {
+            const heartsContainer = document.getElementById('hearts');
+            heartsContainer.innerHTML = '';
+            createHearts();
+        });
     </script>
 </body>
 </html>
