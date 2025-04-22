@@ -1,238 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Doraemon's Special Message</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f8ff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For My Beloved Jhinuk</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&display=swap');
 
-        .container {
-            text-align: center;
-            width: 100%;
-            max-width: 500px;
-            position: relative;
-        }
+    body {
+      font-family: 'Dancing Script', cursive;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 10px;
+      overflow-x: hidden;
+    }
 
-        .speech-bubble {
-            background-color: white;
-            padding: 12px 16px;
-            border-radius: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            width: 90%;
-            max-width: 280px;
-            animation: fadeIn 2s forwards 1s;
-            box-sizing: border-box;
-            margin: 0 auto 20px auto;
-            position: relative;
-        }
+    .container {
+      text-align: center;
+      max-width: 95%;
+      width: 100%;
+      position: relative;
+      z-index: 10;
+      opacity: 0;
+      animation: fadeIn 3s forwards 5s;
+    }
 
-        .speech-bubble:after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            margin-left: -15px;
-            border-width: 15px 15px 0;
-            border-style: solid;
-            border-color: white transparent;
-        }
+    .photo-frame {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: white;
+      margin: 15px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1), 0 0 20px rgba(255,107,139,0.4);
+      border: 4px solid white;
+      animation: photoAppear 1s forwards 7.5s;
+      opacity: 0;
+    }
 
-        .message {
-            font-size: clamp(14px, 4vw, 18px);
-            color: #333;
-            font-weight: bold;
-            margin: 0;
-            line-height: 1.4;
-            text-align: center;
-            word-wrap: break-word;
-        }
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-        .doraemon {
-            width: 300px;
-            height: 300px;
-            background-image: url('doremon.jpg');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            margin: 0 auto;
-            animation: bounce 2s infinite alternate;
-        }
+    @keyframes photoAppear {
+      0% {
+        transform: scale(0) rotate(180deg);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
 
-        .caption {
-            margin-top: 40px;
-            font-style: italic;
-            color: #666;
-            opacity: 0;
-            animation: fadeIn 2s forwards 3s;
-            position: relative;
-            padding: 0 20px;
-            font-size: clamp(14px, 4vw, 18px);
-        }
+    .comic-bubble {
+      position: relative;
+      background: #fff;
+      color: #ff6b8b;
+      border: 2px solid #ff6b8b;
+      padding: 12px 18px;
+      border-radius: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      margin: 15px auto 5px;
+      max-width: 260px;
+      box-shadow: 0 6px 15px rgba(255,107,139,0.2);
+      opacity: 0;
+      transform: scale(0);
+      animation: comicBubbleAppear 1s forwards 7.8s;
+    }
 
-        .caption:before, .caption:after {
-            content: '"';
-            font-size: 24px;
-            color: #ff6b6b;
-            position: absolute;
-        }
+    .comic-bubble:after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      margin-left: -12px;
+      border-width: 15px 12px 0;
+      border-style: solid;
+      border-color: #fff transparent;
+    }
 
-        .caption:before {
-            left: 0;
-            top: -5px;
-        }
+    @keyframes comicBubbleAppear {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      80% {
+        transform: scale(1.05);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
 
-        .caption:after {
-            right: 0;
-            bottom: -10px;
-        }
+    .caption {
+      margin-top: 25px;
+      color: #333;
+      font-size: 18px;
+      padding: 0 10px;
+      opacity: 0;
+      animation: fadeIn 2s forwards 9s;
+      font-family: 'Pacifico', cursive;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
 
-        @keyframes bounce {
-            from {
-                transform: translateY(0);
-            }
-            to {
-                transform: translateY(-20px);
-            }
-        }
+    .caption:before, .caption:after {
+      content: '"';
+      font-size: 30px;
+      color: #ff6b8b;
+      position: relative;
+    }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .love-btn {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: linear-gradient(45deg, #ff6b8b, #ff8e8e);
+      color: white;
+      border: none;
+      border-radius: 40px;
+      font-size: 18px;
+      font-family: 'Dancing Script', cursive;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(255, 107, 139, 0.3);
+      opacity: 0;
+      animation: fadeIn 1s forwards 10s;
+      transition: transform 0.2s ease;
+    }
 
-        .hearts {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            top: 0;
-            left: 0;
-        }
+    .love-btn:active {
+      transform: scale(0.95);
+    }
 
-        .heart {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: #ff6b6b;
-            transform: rotate(45deg);
-            opacity: 0;
-        }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        .heart:before,
-        .heart:after {
-            content: '';
-            width: 20px;
-            height: 20px;
-            background-color: #ff6b6b;
-            border-radius: 50%;
-            position: absolute;
-        }
+    .hidden-message {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+      font-size: 20px;
+      text-align: center;
+      padding: 20px;
+    }
 
-        .heart:before {
-            top: -10px;
-            left: 0;
-        }
+    .hidden-message h1 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #ff6b8b;
+      text-shadow: 0 0 8px #ff6b8b;
+    }
 
-        .heart:after {
-            top: 0;
-            left: -10px;
-        }
+    .countdown {
+      font-size: 2.5rem;
+      margin: 10px 0;
+      font-family: monospace;
+      color: #333;
+    }
 
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(45deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(45deg);
-                opacity: 0;
-            }
-        }
-    </style>
+    .final-surprise {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      z-index: 200;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      padding: 10px;
+    }
+
+    .final-surprise video {
+      width: 100%;
+      max-width: 90vw;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255,107,139,0.7);
+    }
+
+    .final-message {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      text-align: center;
+      color: #ff6b8b;
+      text-shadow: 0 0 8px #ff6b8b;
+      padding: 0 10px;
+    }
+  </style>
 </head>
 <body>
-    <div class="hearts" id="hearts"></div>
-    <div class="container">
-        <div class="speech-bubble">
-            <p class="message">Hey Sagorika, You know Kaustav loves you more than anything existing!</p>
-        </div>
-        <div class="doraemon"></div>
-        <p class="caption">Hey Sagorika, You know Kaustav loves you more than anything existing</p>
+  <div class="hidden-message" id="hiddenMessage">
+    <h1>Jhinuk my Love,This Is For You!</h1>
+    <p>Get ready for a special surprise from your Kaustav ...</p>
+    <div class="countdown" id="countdown">5</div>
+    <p>Keep looking at the screen!</p>
+  </div>
+
+  <div class="final-surprise" id="finalSurprise">
+    <video id="surpriseVideo" controls>
+      <source src="my-love.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="final-message">Jhinuk, will you be mine forever?</div>
+  </div>
+
+  <div class="container">
+    <!-- 💬 Comic bubble ABOVE the image -->
+    <div class="comic-bubble" id="comicBubble">
+      <p>"Babi, I loves you more than anything!"</p>
     </div>
 
-    <script>
-        // Create floating hearts
-        function createHearts() {
-            const heartsContainer = document.getElementById('hearts');
-            const colors = ['#ff6b6b', '#ff8e8e', '#ffb3b3', '#ffd8d8'];
-            const count = window.innerWidth < 480 ? 10 : 15;
+    <div class="photo-frame">
+      <img src="sago.jpg" alt="Romantic Photo">
+    </div>
 
-            for (let i = 0; i < count; i++) {
-                const heart = document.createElement('div');
-                heart.classList.add('heart');
+    <p class="caption">My Dear Wife..my love, my everything<br>You're the missing piece that makes my life complete</p>
+    
+    <button class="love-btn" id="loveBtn">Click for the Biggest Surprise!</button>
+  </div>
 
-                const size = Math.random() * 15 + 5;
-                const posX = Math.random() * window.innerWidth;
-                const posY = Math.random() * window.innerHeight;
-                const delay = Math.random() * 5;
-                const duration = Math.random() * 5 + 5;
-                const color = colors[Math.floor(Math.random() * colors.length)];
+  <audio id="romanticMusic" loop autoplay>
+    <source src="audio.mp3" type="audio/mpeg">
+  </audio>
 
-                heart.style.width = `${size}px`;
-                heart.style.height = `${size}px`;
-                heart.style.left = `${posX}px`;
-                heart.style.top = `${posY}px`;
-                heart.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
-                heart.style.backgroundColor = color;
+  <script>
+    let count = 5;
+    const countdownElement = document.getElementById('countdown');
+    const hiddenMessage = document.getElementById('hiddenMessage');
+    const romanticMusic = document.getElementById('romanticMusic');
+    const finalSurprise = document.getElementById('finalSurprise');
+    const surpriseVideo = document.getElementById('surpriseVideo');
 
-                heartsContainer.appendChild(heart);
-            }
-        }
+    const countdown = setInterval(() => {
+      count--;
+      countdownElement.textContent = count;
+      if (count === 0) {
+        clearInterval(countdown);
+        hiddenMessage.style.display = 'none';
+        romanticMusic.play();
+      }
+    }, 1000);
 
-        window.onload = function () {
-            createHearts();
+    
 
-            const doraemon = document.querySelector('.doraemon');
-            setInterval(() => {
-                doraemon.style.animation = 'none';
-                setTimeout(() => {
-                    doraemon.style.animation = 'bounce 2s infinite alternate';
-                }, 200);
-            }, 5000);
-        };
-
-        // Optional: recreate hearts on window resize
-        window.addEventListener('resize', function () {
-            const heartsContainer = document.getElementById('hearts');
-            heartsContainer.innerHTML = '';
-            createHearts();
-        });
-    </script>
+    document.getElementById('loveBtn').addEventListener('click', () => {
+      finalSurprise.style.display = 'flex';
+      //romanticMusic.pause();//
+      surpriseVideo.play();
+    });
+  </script>
 </body>
 </html>
+
